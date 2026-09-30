@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rollback Supply Co. — Gear for people who keep production up</title>
+  <meta name="description" content="Hoodies, desk gear, hardware and field guides for DevOps and SRE teams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f1d1a'/><path d='M9 20a7 7 0 1 0 2-9' stroke='%23e0673a' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M7 7v6h6' stroke='%23e0673a' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 20a7 7 0 1 0 2-9" /><path d="M7 7v6h6" /></svg>
+      <span>Rollback<em>Supply Co.</em></span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#catalog">Catalog</a>
+      <a href="#how">Shipping</a>
+    </nav>
+    <button class="cart-button" type="button" id="cart-open" aria-haspopup="dialog">
+      <span>Cart</span>
+      <span class="cart-count" id="cart-count">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow mono">v4.2.1 · deployed 09:14 UTC · all checks green</p>
+        <h1>Gear for the people who <span class="strike">page</span> <span class="accent">keep production up.</span></h1>
+        <p class="lede">Hoodies, desk kit, status lights and field-tested templates for SREs, platform teams and anyone who has typed <code>git revert</code> at 3 a.m.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#catalog">Browse the catalog</a>
+          <span class="mono muted">Free shipping over $75 · Digital goods deliver instantly</span>
+        </div>
+      </div>
+      <aside class="hero-log mono" aria-label="Deploy log">
+        <div class="log-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>pipeline / storefront</span></div>
+        <ol>
+          <li><span class="t">09:13:02</span> checkout <span class="ok">ok</span></li>
+          <li><span class="t">09:13:19</span> lint, test (412 passed) <span class="ok">ok</span></li>
+          <li><span class="t">09:13:47</span> build image sha-8e1f3c2 <span class="ok">ok</span></li>
+          <li><span class="t">09:13:58</span> canary 5% → error rate 0.03% <span class="ok">ok</span></li>
+          <li><span class="t">09:14:21</span> promote 100% <span class="ok">ok</span></li>
+          <li><span class="t">09:14:22</span> hoodies restocked <span class="warn">new</span></li>
+          <li class="cursor"><span class="t">09:14:23</span> awaiting your order<span class="blink">_</span></li>
+        </ol>
+      </aside>
+    </section>
+
+    <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+      <div class="catalog-head">
+        <h2 id="catalog-title">The catalog</h2>
+        <div class="filters mono" role="tablist" aria-label="Filter by category" id="filters">
+          <button role="tab" aria-selected="true" data-cat="all">all</button>
+          <button role="tab" aria-selected="false" data-cat="apparel">apparel</button>
+          <button role="tab" aria-selected="false" data-cat="desk">desk</button>
+          <button role="tab" aria-selected="false" data-cat="hardware">hardware</button>
+          <button role="tab" aria-selected="false" data-cat="digital">digital</button>
+        </div>
+      </div>
+      <div class="grid" id="grid" aria-live="polite">
+        <div class="card skeleton"></div><div class="card skeleton"></div><div class="card skeleton"></div>
+        <div class="card skeleton"></div><div class="card skeleton"></div><div class="card skeleton"></div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="how-item"><span class="mono num">01</span><h3>Ships in 2 business days</h3><p>Physical goods go out from our warehouse with tracking. Free over $75.</p></div>
+      <div class="how-item"><span class="mono num">02</span><h3>Digital delivers instantly</h3><p>Modules, courses and templates are emailed to your checkout address right after payment.</p></div>
+      <div class="how-item"><span class="mono num">03</span><h3>30-day rollback policy</h3><p>Not what you expected? Send it back within 30 days for a full refund.</p></div>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <span>© 2026 Rollback Supply Co.</span>
+    <span>Payments secured by Stripe</span>
+  </footer>
+
+  <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-head">
+      <h2 id="drawer-title">Your cart</h2>
+      <button class="icon-btn" type="button" id="cart-close" aria-label="Close cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="cart-lines"></div>
+    <div class="drawer-foot">
+      <div class="row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+      <p class="mono muted small">Shipping and tax are calculated at checkout.</p>
+      <p class="form-error" id="checkout-error" role="alert"></p>
+      <button class="btn btn-primary btn-block" type="button" id="checkout" disabled>Check out securely</button>
+    </div>
+  </aside>
+
+  <dialog class="detail" id="detail" aria-labelledby="detail-name">
+    <div class="detail-art" id="detail-art"></div>
+    <div class="detail-body">
+      <button class="icon-btn detail-close" type="button" id="detail-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <p class="mono muted" id="detail-cat"></p>
+      <h2 id="detail-name"></h2>
+      <p class="detail-tagline" id="detail-tagline"></p>
+      <p id="detail-desc"></p>
+      <div class="detail-buy">
+        <strong class="price" id="detail-price"></strong>
+        <div class="qty" aria-label="Quantity">
+          <button type="button" id="qty-dec" aria-label="Decrease quantity">−</button>
+          <output id="qty-val">1</output>
+          <button type="button" id="qty-inc" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn btn-primary" type="button" id="detail-add">Add to cart</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
